@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Pickup Soccer</title>
+<style>
+:root{--green:#236b45;--deep:#173d2b;--muted:#5d6d63;--paper:#f6f8f5}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--deep);background:var(--paper)}
+header{background:#fff;border-bottom:1px solid #e3e9e3}.nav{max-width:1000px;margin:auto;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font-weight:700}.nav a{color:var(--green);text-decoration:none;font-weight:700}
+.hero{max-width:1000px;margin:auto;padding:68px 24px;text-align:center}.eyebrow{color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.82rem}
+h1{font-size:clamp(2.5rem,7vw,4.7rem);line-height:1.05;margin:14px 0;letter-spacing:-2px}.hero p{max-width:650px;margin:auto;color:var(--muted);font-size:1.15rem;line-height:1.7}
+.button{display:inline-block;margin-top:24px;background:var(--green);color:white;text-decoration:none;font-weight:700;padding:15px 23px;border-radius:8px}
+main{max-width:900px;margin:0 auto;padding:0 24px 64px}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.fact,section{background:white;border:1px solid #e5ebe5;border-radius:12px;padding:24px}.fact{text-align:center}.fact strong{display:block;color:var(--green);font-size:1.25rem;margin-bottom:7px}
+section{margin-top:18px}h2{margin:0 0 12px;font-size:1.35rem}p{line-height:1.65}.muted{color:var(--muted)}
+.field-photo{width:100%;display:block;border-radius:9px;margin-top:14px;aspect-ratio:16/9;object-fit:cover}
+.photo-credit{font-size:.82rem;color:var(--muted)}.feature-nav{max-width:900px;margin:0 auto;padding:0 24px 8px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.feature-nav a{color:var(--green);background:#eaf1eb;border-radius:999px;padding:9px 13px;text-decoration:none;font-weight:700;font-size:.92rem}h3{font-size:1.03rem;margin:18px 0 4px}li{line-height:1.65;margin:4px 0}footer{border-top:1px solid #e3e9e3;text-align:center;padding:25px;color:var(--muted);font-size:.9rem}
+
+.weather-widget{margin:18px 0;border-radius:16px;overflow:hidden;background:#eef6fb;border:1px solid #cbdce8;box-shadow:0 8px 22px rgba(23,61,43,.08)}
+.wx-current{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:20px 22px;background:linear-gradient(120deg,#17466f,#287fba);color:#fff}
+.wx-current-main{display:flex;align-items:center;gap:16px}.wx-current-icon{font-size:3.2rem;line-height:1}.wx-current-temp{font-size:clamp(2.7rem,8vw,4.2rem);font-weight:300;line-height:1;letter-spacing:-2px}.wx-current-condition{font-size:1rem;margin-top:7px;color:#edf7ff}.wx-current-location{font-size:.9rem;color:#e2f1fb;margin-top:4px}
+.wx-current-details{text-align:right;color:#fff;font-size:.92rem;line-height:1.7}.wx-current-details strong{display:block;font-size:1.05rem}
+.wx-hourly-panel{padding:15px 18px 17px;background:#e7f1f8;border-bottom:1px solid #d4e2eb}.wx-section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;color:#31526a;font-weight:700}.wx-section-title span{font-size:.8rem;font-weight:400;color:#60798b}.wx-hourly{display:flex;gap:10px;overflow-x:auto;padding:2px 0 8px;scroll-snap-type:x mandatory}.wx-hour{flex:0 0 82px;scroll-snap-align:start;text-align:center;border:1px solid #d2e1eb;border-radius:11px;background:#fff;padding:10px 6px;color:#31526a}.wx-hour-time{font-size:.82rem;font-weight:700}.wx-hour-icon{font-size:1.45rem;margin:8px 0}.wx-hour-temp{font-weight:700;font-size:.98rem}.wx-hour-rain{font-size:.74rem;color:#608198;margin-top:5px}
+.wx-daily-panel{padding:16px 18px 18px;background:#f8fbfd}.wx-daily-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}.wx-daily-heading h3{margin:0;color:#31526a;font-size:1.08rem}.wx-range-tabs{display:flex;gap:6px}.wx-range-tab,.wx-page-button,.wx-retry{border:1px solid #9dbbd0;border-radius:999px;background:#fff;color:#17466f;padding:8px 12px;font:700 .84rem Arial,Helvetica,sans-serif;cursor:pointer}.wx-range-tab.active{background:#17466f;border-color:#17466f;color:#fff}.wx-range-tab:focus-visible,.wx-page-button:focus-visible,.wx-retry:focus-visible{outline:2px solid #287fba;outline-offset:2px}.wx-pagination{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0 10px;color:#60798b;font-size:.82rem}.wx-page-button:disabled{opacity:.38;cursor:not-allowed}.wx-day-list{display:grid;gap:0}.wx-day-row{display:grid;grid-template-columns:minmax(82px,1.1fr) 38px 48px minmax(55px,1fr) 48px;align-items:center;gap:8px;padding:10px 3px;border-bottom:1px solid #e5edf2;color:#31526a}.wx-day-row:last-child{border-bottom:0}.wx-day-name{font-weight:700;font-size:.9rem}.wx-day-date{font-size:.76rem;color:#718899;margin-top:2px}.wx-day-icon{text-align:center;font-size:1.35rem}.wx-day-low,.wx-day-high{text-align:right;font-variant-numeric:tabular-nums;font-size:.9rem}.wx-temp-track{height:7px;border-radius:999px;background:#e1e9ee;overflow:hidden}.wx-temp-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#84c9a0,#e6cf59,#f39a35)}.wx-day-rain{grid-column:1/-1;margin-top:-3px;margin-left:calc(20% + 6px);font-size:.72rem;color:#65869d}
+.wx-widget-footer{padding:13px 18px 16px;background:#edf5fa;color:#496477;font-size:.85rem;line-height:1.55}.wx-widget-footer p{margin:0 0 8px}.wx-widget-links{display:flex;flex-wrap:wrap;gap:12px}.wx-widget-links a{color:#145b8c;font-weight:700}.wx-status{font-size:.84rem;color:#567184;margin-top:10px}.wx-error{padding:18px;text-align:center;background:#fff;color:#425d70}.wx-retry{margin-top:8px}
+@media(max-width:600px){.wx-current{align-items:flex-start;padding:17px}.wx-current-details{text-align:left;width:100%;display:flex;gap:16px;flex-wrap:wrap}.wx-current-details strong{display:inline}.wx-daily-panel{padding:14px 12px}.wx-day-row{grid-template-columns:minmax(66px,1fr) 30px 39px minmax(42px,.8fr) 39px;gap:5px;padding:9px 0}.wx-day-name{font-size:.82rem}.wx-day-date{font-size:.7rem}.wx-day-low,.wx-day-high{font-size:.82rem}.wx-day-rain{margin-left:calc(19% + 4px)}.wx-range-tab{padding:8px 10px}.wx-hour{flex-basis:72px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="brand">⚽ Free Pickup Soccer</div><a href="join.html">Registration form</a></div></header>
+<div class="hero">
+<div class="eyebrow">Everyone is welcome</div>
+<h1>Free Pickup Soccer</h1>
+<p>Get outside, play soccer, and meet other players. Join us for a fun, casual game on a grass field.</p>
+<a class="button" href="join.html">Complete the form · Join the game</a>
+</div>
+<nav class="feature-nav" aria-label="Website sections"><a href="#rules">Rules</a><a href="#weather">Weather</a><a href="#field">Field info</a><a href="#faq">FAQ</a><a href="#bring">What to bring</a></nav>
+<main>
+<div class="facts">
+<div class="fact"><strong>100% Free</strong><span class="muted">No cost to play</span></div>
+<div class="fact"><strong>Ages 11–14</strong><span class="muted">For players in this age range</span></div>
+<div class="fact"><strong>Grass field</strong><span class="muted">Outdoor pickup soccer</span></div>
+</div>
+<section>
+<h2>Where we play</h2>
+<p><strong>Pleasant Valley Soccer Fields</strong><br>3405 Valley Rd, Basking Ridge, NJ 07920</p>
+<img class="field-photo" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/20/e2/6a/be/pleasant-valley-park.jpg?h=1200&s=1&w=1200" alt="Grass recreation field and soccer goal at Pleasant Valley Park in Basking Ridge">
+<p class="photo-credit">Photo: Pleasant Valley Park, Basking Ridge. <a href="https://www.tripadvisor.co.uk/Attraction_Review-g46287-d23712118-Reviews-Pleasant_Valley_Park-Basking_Ridge_New_Jersey.html">Photo source</a>.</p>
+<p class="muted">Please confirm the exact soccer playing area with the organizer before attending.</p>
+</section>
+<section><h2>When we play</h2><p><strong>Schedule: TBD</strong></p><p class="muted">The day and time will be announced later. Check back for updates before making plans to attend.</p></section>
+<section><h2>How to join</h2><p>Complete every question on the registration form with a parent or guardian. Print the completed form, have your parent or guardian sign it, and bring it to the organizer when you arrive.</p><a class="button" href="join.html">Open registration form</a></section>
+<section id="bring"><h2>What to Bring</h2><ul><li>Water bottle</li><li>Comfortable athletic clothes</li><li>Soccer cleats or athletic shoes suitable for grass</li><li>Shin guards (recommended)</li><li>Your completed, parent/guardian-signed registration form</li></ul><p class="muted">Label your belongings and take everything home with you.</p></section>
+<section id="rules"><h2>Rules of Pickup Soccer</h2><ul><li>Respect every player, regardless of skill level.</li><li>Play fairly; no fighting, bullying, dangerous tackles, or intentional rough play.</li><li>Listen to reasonable organizer instructions and stop play when asked.</li><li>Call fouls honestly and settle disagreements calmly.</li><li>Keep the field and surrounding area clean.</li><li>Tell an organizer if someone is hurt or the field or equipment seems unsafe.</li></ul><p class="muted">Organizers may pause play, change teams, or ask someone to stop playing when needed for safety.</p></section>
+<section id="weather">
+<h2>Weather Updates</h2>
+<p>Check the forecast for Basking Ridge before heading to the fields. Weather and field conditions can change whether it is safe to play.</p>
+<div class="weather-widget" aria-label="Interactive weather forecast for Basking Ridge, New Jersey">
+  <div class="wx-current">
+    <div>
+      <div class="wx-current-main">
+        <div class="wx-current-icon" id="wxCurrentIcon" aria-hidden="true">🌤️</div>
+        <div>
+          <div class="wx-current-temp" id="wxCurrentTemp">--°</div>
+          <div class="wx-current-condition" id="wxCurrentCondition">Loading local forecast…</div>
+        </div>
+      </div>
+      <div class="wx-current-location">Basking Ridge, NJ 07920 · Pleasant Valley Park</div>
+    </div>
+    <div class="wx-current-details">
+      <div><strong id="wxTodayHighLow">H: --° · L: --°</strong>Today’s high and low</div>
+      <div><strong id="wxWind">-- mph</strong>Current wind</div>
+    </div>
+  </div>
+  <div class="wx-hourly-panel">
+    <div class="wx-section-title">Hourly forecast <span>Scroll to see upcoming hours</span></div>
+    <div class="wx-hourly" id="wxHourly" aria-live="polite"><div class="wx-hour">Loading…</div></div>
+  </div>
+  <div class="wx-daily-panel">
+    <div class="wx-daily-heading">
+      <h3>Daily forecast</h3>
+      <div class="wx-range-tabs" role="group" aria-label="Choose forecast length">
+        <button type="button" class="wx-range-tab active" data-wx-days="7" aria-pressed="true">7 days</button>
+        <button type="button" class="wx-range-tab" data-wx-days="16" aria-pressed="false">16 days</button>
+      </div>
+    </div>
+    <div class="wx-pagination">
+      <button type="button" class="wx-page-button" id="wxPrev" disabled>← Previous</button>
+      <span id="wxRangeLabel">Forecast loading…</span>
+      <button type="button" class="wx-page-button" id="wxNext" disabled>Next →</button>
+    </div>
+    <div class="wx-day-list" id="wxDaily" aria-live="polite"><div class="wx-error">Loading forecast for Basking Ridge…</div></div>
+    <div class="wx-status" id="wxStatus" role="status">Getting the latest available forecast…</div>
+  </div>
+  <div class="wx-widget-footer">
+    <p>This interactive on-page forecast uses Open-Meteo weather data because Weather.com does not allow its full forecast webpage to load inside this website. The public forecast service provides up to 16 days; forecasts farther ahead are less certain. This is not a 21-day forecast.</p>
+    <div class="wx-widget-links">
+      <a href="https://weather.com/us/new-jersey/basking-ridge/postcode/07920/tenday" target="_blank" rel="noopener noreferrer">Open Weather.com 10-day forecast ↗</a>
+      <a href="https://weather.com/us/new-jersey/basking-ridge/postcode/07920/monthly" target="_blank" rel="noopener noreferrer">Open Weather.com monthly calendar ↗</a>
+      <a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener noreferrer">Forecast data details ↗</a>
+    </div>
+  </div>
+</div>
+<p class="muted">Games may be delayed or canceled for thunderstorms, lightning, heavy rain, extreme heat, or unsafe field conditions. If you hear thunder, move to a safe enclosed shelter. Confirm with the organizer whether a game is still on.</p>
+</section>
+<section id="field"><h2>Field Information</h2><p><strong>Pleasant Valley Soccer Fields</strong><br>3405 Valley Rd, Basking Ridge, NJ 07920</p><p>Playing surface: grass. Please check with the organizer to confirm the exact field and meeting spot before attending. Do not assume a particular field or goal area is reserved.</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=3405+Valley+Rd+Basking+Ridge+NJ+07920" target="_blank" rel="noopener">Open directions to the field</a>.</p></section>
+<section id="faq"><h2>Frequently Asked Questions</h2><h3>Does it cost anything?</h3><p>No. Participation is free.</p><h3>Who can play?</h3><p>The activity is for players ages 11–14.</p><h3>Do I need to be on a team?</h3><p>No, but it is recommended that you have some skill.</p><h3>When are games?</h3><p>The schedule is currently TBD. Check with the organizer for updates before traveling.</p><h3>Do I need to register?</h3><p>Yes. Complete the registration form with a parent or guardian, have them sign it, and bring it when you arrive.</p><h3>What if the weather is bad?</h3><p>Check with the organizer before leaving. Games may be changed or canceled for unsafe weather or field conditions.</p><h3>Are adults supervising?</h3><p>This is an informal recreational activity. Review the parent/guardian agreement carefully; do not rely on youth organizers for childcare, medical care, or transportation. It is recommended that you stay at the park with your child and supervise. Remember, this is run by youth participants.</p></section>
+</main>
+<footer>Free Pickup Soccer · Play fair · Have fun · Respect everyone</footer>
+
+<script>
+(function () {
+  'use strict';
+  const endpoint = 'https://api.open-meteo.com/v1/forecast?latitude=40.6656&longitude=-74.5634&current=temperature_2m,relative_humidity_2m,is_day,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&forecast_days=16';
+  const $ = (id) => document.getElementById(id);
+  const weatherInfo = (code, isDay) => {
+    if (code === 0) return { icon: isDay ? '☀️' : '🌙', label: isDay ? 'Clear sky' : 'Clear night' };
+    if (code === 1) return { icon: isDay ? '🌤️' : '🌙', label: 'Mainly clear' };
+    if (code === 2) return { icon: '⛅', label: 'Partly cloudy' };
+    if (code === 3) return { icon: '☁️', label: 'Overcast' };
+    if (code === 45 || code === 48) return { icon: '🌫️', label: 'Fog' };
+    if ([51, 53, 55, 56, 57].includes(code)) return { icon: '🌦️', label: 'Drizzle' };
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return { icon: '🌧️', label: 'Rain or showers' };
+    if ([71, 73, 75, 77, 85, 86].includes(code)) return { icon: '🌨️', label: 'Snow' };
+    if ([95, 96, 99].includes(code)) return { icon: '⛈️', label: 'Thunderstorms' };
+    return { icon: '🌡️', label: 'Mixed conditions' };
+  };
+  const localDate = (isoDate, options) => new Date(isoDate + 'T12:00:00').toLocaleDateString('en-US', options);
+  const localHour = (isoTime) => {
+    const match = isoTime.match(/T(\d{2}):(\d{2})/);
+    if (!match) return '';
+    let hour = Number(match[1]);
+    const suffix = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12 || 12;
+    return hour + suffix;
+  };
+  let forecast = null;
+  let selectedDays = 7;
+  let page = 0;
+
+  function drawHourly(data) {
+    const hourly = data.hourly;
+    const now = new Date();
+    const nowKey = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + 'T' + String(now.getHours()).padStart(2, '0') + ':00';
+    let first = hourly.time.findIndex(t => t >= nowKey);
+    if (first < 0) first = 0;
+    const items = [];
+    for (let i = first; i < Math.min(first + 8, hourly.time.length); i++) {
+      const info = weatherInfo(hourly.weather_code[i], true);
+      const label = i === first ? 'Now' : localHour(hourly.time[i]);
+      const rain = hourly.precipitation_probability[i];
+      items.push('<div class="wx-hour"><div class="wx-hour-time">' + label + '</div><div class="wx-hour-icon" aria-hidden="true">' + info.icon + '</div><div class="wx-hour-temp">' + Math.round(hourly.temperature_2m[i]) + '°</div><div class="wx-hour-rain">' + (rain == null ? '—' : Math.round(rain) + '% rain') + '</div></div>');
+    }
+    $('wxHourly').innerHTML = items.join('');
+  }
+
+  function drawDaily() {
+    if (!forecast) return;
+    const daily = forecast.daily;
+    const total = Math.min(selectedDays, daily.time.length);
+    const pageSize = 7;
+    const pageCount = Math.ceil(total / pageSize);
+    page = Math.max(0, Math.min(page, pageCount - 1));
+    const first = page * pageSize;
+    const last = Math.min(first + pageSize, total);
+    const visible = [];
+    const lowMin = Math.min(...daily.temperature_2m_min.slice(0, total));
+    const highMax = Math.max(...daily.temperature_2m_max.slice(0, total));
+    const span = Math.max(1, highMax - lowMin);
+
+    for (let i = first; i < last; i++) {
+      const date = daily.time[i];
+      const hi = Math.round(daily.temperature_2m_max[i]);
+      const lo = Math.round(daily.temperature_2m_min[i]);
+      const info = weatherInfo(daily.weather_code[i], true);
+      const left = Math.max(0, Math.min(100, ((lo - lowMin) / span) * 100));
+      const width = Math.max(5, Math.min(100 - left, ((hi - lo) / span) * 100));
+      const rain = daily.precipitation_probability_max[i];
+      visible.push('<div class="wx-day-row"><div><div class="wx-day-name">' + localDate(date, { weekday: 'short' }) + '</div><div class="wx-day-date">' + localDate(date, { month: 'short', day: 'numeric' }) + '</div></div><div class="wx-day-icon" title="' + info.label + '" aria-label="' + info.label + '">' + info.icon + '</div><div class="wx-day-low">' + lo + '°</div><div class="wx-temp-track" aria-hidden="true"><div class="wx-temp-fill" style="margin-left:' + left.toFixed(1) + '%;width:' + width.toFixed(1) + '%"></div></div><div class="wx-day-high">' + hi + '°</div><div class="wx-day-rain">' + (rain == null ? 'Precipitation chance unavailable' : Math.round(rain) + '% chance of precipitation') + ' · Wind up to ' + Math.round(daily.wind_speed_10m_max[i]) + ' mph</div></div>');
+    }
+    $('wxDaily').innerHTML = visible.join('');
+    $('wxRangeLabel').textContent = 'Days ' + (first + 1) + '–' + last + ' of ' + total;
+    $('wxPrev').disabled = page === 0;
+    $('wxNext').disabled = page >= pageCount - 1;
+  }
+
+  function render(data) {
+    forecast = data;
+    const current = data.current;
+    const todayHigh = Math.round(data.daily.temperature_2m_max[0]);
+    const todayLow = Math.round(data.daily.temperature_2m_min[0]);
+    const currentInfo = weatherInfo(current.weather_code, current.is_day === 1);
+    $('wxCurrentIcon').textContent = currentInfo.icon;
+    $('wxCurrentTemp').textContent = Math.round(current.temperature_2m) + '°';
+    $('wxCurrentCondition').textContent = currentInfo.label;
+    $('wxTodayHighLow').textContent = 'H: ' + todayHigh + '° · L: ' + todayLow + '°';
+    $('wxWind').textContent = Math.round(current.wind_speed_10m) + ' mph';
+    drawHourly(data);
+    drawDaily();
+    const updated = new Date(data.current.time);
+    $('wxStatus').textContent = 'Updated ' + updated.toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' }) + ' local time · Temperatures in °F.';
+  }
+
+  async function loadForecast() {
+    $('wxStatus').textContent = 'Getting the latest forecast…';
+    try {
+      const response = await fetch(endpoint, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Weather service returned HTTP ' + response.status);
+      const data = await response.json();
+      if (!data.current || !data.daily || !data.hourly || !data.daily.time || !data.daily.time.length) {
+        throw new Error('The weather service returned incomplete forecast data.');
+      }
+      render(data);
+    } catch (error) {
+      $('wxDaily').innerHTML = '<div class="wx-error">The forecast could not load right now. Check your internet connection and try again.<br><button type="button" class="wx-retry" id="wxRetry">Try again</button></div>';
+      $('wxHourly').innerHTML = '<div class="wx-error">Hourly forecast unavailable.</div>';
+      $('wxStatus').textContent = 'Weather data is temporarily unavailable.';
+      const retry = $('wxRetry');
+      if (retry) retry.addEventListener('click', loadForecast);
+    }
+  }
+
+  document.querySelectorAll('[data-wx-days]').forEach(button => {
+    button.addEventListener('click', () => {
+      selectedDays = Number(button.getAttribute('data-wx-days'));
+      page = 0;
+      document.querySelectorAll('[data-wx-days]').forEach(tab => {
+        const active = tab === button;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      drawDaily();
+    });
+  });
+  $('wxPrev').addEventListener('click', () => { page = Math.max(0, page - 1); drawDaily(); });
+  $('wxNext').addEventListener('click', () => { page += 1; drawDaily(); });
+  loadForecast();
+})();
+</script>
+
+</body></html>
